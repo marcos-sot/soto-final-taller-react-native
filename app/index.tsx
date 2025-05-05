@@ -1,9 +1,20 @@
-import { Text, View, ScrollView,FlatList } from "react-native";
+/*import { Text, View, ScrollView,FlatList } from "react-native";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P"; // o la ruta que uses
 import EvilIcons from '@expo/vector-icons/EvilIcons';
+*/
+import { HomeScreen } from "@/src/screens/HomeScreen";
+export default HomeScreen;
 
+
+
+
+/*
 export default function Index() {
   return (
+
+
+
+
     <View
       style={{
         flex: 1,        
@@ -230,5 +241,7 @@ export default function Index() {
 
       
     </View>
+    
   );
 }
+*/
