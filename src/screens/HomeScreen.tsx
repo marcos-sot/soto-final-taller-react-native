@@ -16,6 +16,6 @@ export function HomeScreen() {
 
 
 const styles = StyleSheet.create({
-    screenContainer: { flex: 1, backgroundColor: "#1A1F2C", padding: 8, gap: 20, },
+    screenContainer: { flex: 1, backgroundColor: "#1A1F2C", padding: 10, gap: 20, },
     separator: { height: 4 },
 });
