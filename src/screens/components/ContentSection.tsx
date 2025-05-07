@@ -82,11 +82,12 @@ const style = StyleSheet.create({
   containerTitle: {
     backgroundColor: "#6E59A5",
     borderColor: "#9B87F5",
-    borderWidth: 1,
-    width: 120,
-    marginTop: -18,
+    borderWidth: 1,  
+    marginTop: -24,
     zIndex: 1,
-    alignItems: "center",    
+    padding:6,
+    alignItems: "center",   
+    alignSelf:"flex-start" 
   },
 
   titleText: {

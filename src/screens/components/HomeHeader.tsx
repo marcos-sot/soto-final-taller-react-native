@@ -28,7 +28,8 @@ export function HomeHeader() {
 const style = StyleSheet.create({
   headerContainer:{
     flexDirection: "row", 
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems:"center"
    },
 
   textTitle:{
