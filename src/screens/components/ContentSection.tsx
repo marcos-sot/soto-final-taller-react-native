@@ -3,6 +3,8 @@ import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import { ContenidoAudiovisual } from "@/src/data/contenidosAudiovisuales";
 import { generosContenidoAudiovisual } from "@/src/data/generosContenidoAudiovisual";
 import { MediaCard } from "./MediaCard";
+import { Link } from "expo-router";
+
 
 type TContentSectionProps = {
   title: String;
@@ -10,7 +12,7 @@ type TContentSectionProps = {
 }
 
 
-function obtenerNombresDeGeneros(listaGeneros: number[]): string[] {
+export function obtenerNombresDeGeneros(listaGeneros: number[]): string[] {
   return listaGeneros.map((id) => {
     for (let i = 0; i < generosContenidoAudiovisual.length; i++) {
       if (generosContenidoAudiovisual[i].id === id) {
@@ -39,12 +41,23 @@ export function ContentSection({ title, data }: TContentSectionProps) {
           renderItem={({ item }) => {
             const listaNombres = obtenerNombresDeGeneros(item.generos);
           
-            return (              
+            return (
+              <Link 
+              href={{
+                pathname: '/details/[slug]', 
+                params: { 
+                  slug: item.id.toString() }, 
+              }}
+        
+                      
+            
+              >             
                 <MediaCard 
                   nombre={item.nombre}
                   imageUrl={item.imageUrl}
                   generos={listaNombres}  
-                />              
+                />
+              </Link>               
             );
           }}        
           showsHorizontalScrollIndicator={false}
@@ -91,7 +104,7 @@ const style = StyleSheet.create({
   },
 
   titleText: {
-    fontSize: 12,
+    fontSize: 10,
     color: "white",
     fontWeight: "bold",
     textAlign: "center",    

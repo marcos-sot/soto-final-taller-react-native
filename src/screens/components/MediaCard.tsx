@@ -34,7 +34,8 @@ export function MediaCard({nombre,generos,imageUrl}:TMediaCardProp) {
 
 const style = StyleSheet.create ({
   card:{
-    width:160,
+    width:180,
+    height:400,
     borderWidth: 2,
     borderBottomColor: colors.purpuraClaro,
     borderRightColor: colors.purpuraClaro,
@@ -43,17 +44,17 @@ const style = StyleSheet.create ({
   },
 
   ImageBackground:{
-    height:250,   
+    height:280,   
     backgroundColor: colors.grisOscuro
   },
 
   containerInfo :{
-    gap: 6,
+    gap: 14,
     padding: 10
   },
 
 titleText:{
-  fontSize: 6,
+  fontSize: 10,
   fontWeight: "bold",
   color: colors.blanco,  
 },
@@ -71,7 +72,7 @@ cardGenero:{
 },
 
 generoText:{
-  fontSize: 4,
+  fontSize: 9,
   fontWeight: "bold",
   color: colors.blanco
 },

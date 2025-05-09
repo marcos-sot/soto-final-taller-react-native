@@ -1,30 +1,61 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { colors } from "@/src/constants/colors";
 import { ImageBackground } from "expo-image";
+import { useLocalSearchParams,useRouter } from "expo-router";
+import { contenidosAudiovisuales } from "@/src/data/contenidosAudiovisuales";
+import { tiposContenidoAudiovisual } from "@/src/data/tiposContenidoAudiovisual";
+import { obtenerNombresDeGeneros } from "@/src/screens/components/ContentSection";
 
-export default function MediaDetail() {
+
+
+
+function extraerDatos (id: string){
+    return contenidosAudiovisuales.find(item => item.id === +id);
+}
+
+function extraerTipo(id: number){
+    const tipo =tiposContenidoAudiovisual.find(item => item.id === +id)
+    return tipo?.singular
+}
+
+
+export default function MediaSlugDetail() {  
+    const {slug} = useLocalSearchParams(); 
+        
+    const router = useRouter(); 
+    const handleBackPress = () => {
+        router.back();  
+    };
+    const media = extraerDatos(slug as string);
+    const tipoId = media?.tipoId
+    const tipo = tipoId ? extraerTipo(tipoId) : null;
+    
+
+
   return (
     <View style={style.container}>
-      <View style={style.backButton}>
+      <Pressable style={style.backButton} onPress={handleBackPress}>
         <AntDesign name="arrowleft" size={16} color="white" />
         <TextPressStart2P style={style.textButton}>BACK</TextPressStart2P>
-      </View>
+      </Pressable>
 
       <View style={style.containerDetails}>
-        <ImageBackground style={style.ImageBackground}> </ImageBackground>
-        <TextPressStart2P style={style.titleText}>Stranger Things</TextPressStart2P>
+        <ImageBackground style={style.ImageBackground} source={media?.imageUrl}> </ImageBackground>
+        <TextPressStart2P style={style.titleText}>{media?.nombre}</TextPressStart2P>
         <View style={style.generoBanner}>
-          <Text style={style.generoText}>Tv</Text>
+          <Text style={style.generoText}>{tipo}</Text>
         </View>
-        <Text style={style.generoText}>EStes esa las dasinvofirgskndfoasdc, siod sdovnsdv  iodflsdnv nasdiovs</Text>
+        <Text style={style.generoText}>{media?.descripcion}</Text>
 
         <View style={style.generoContainer}>
           <TextPressStart2P style={style.generoTitle}>Generos</TextPressStart2P>
+         
           <View style={style.generoBanner}>
             <Text style={style.generoText}>Drama</Text>
           </View>
+          
         </View>
 
       </View>
