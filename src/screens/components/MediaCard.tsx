@@ -20,8 +20,8 @@ export function MediaCard({nombre,generos,imageUrl}:TMediaCardProp) {
       <View style={style.containerInfo}>
         <TextPressStart2P style={style.titleText}>{nombre}</TextPressStart2P>
         <View style={style.containerGeneros}>
-          {generos.map((nombre) => (
-            <View style={style.cardGenero}>              
+          {generos.map((nombre,index) => (
+            <View key={index} style={style.cardGenero}>              
               <TextPressStart2P style={style.generoText}>{nombre}</TextPressStart2P>              
             </View>
             ))}          
