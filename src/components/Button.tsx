@@ -4,7 +4,7 @@ import { colors } from "../constants/colors";
 
 type TButtonProp = {
   label: string;
-  onPress:  () => void;
+  onPress: () => void;
   icon: React.ReactNode;
 }
 
@@ -23,20 +23,20 @@ export function Button({ label, onPress, icon }: TButtonProp) {
 
 
 
- const style = StyleSheet.create({
-    button: {
-      flexDirection: "row",
-      backgroundColor: colors.purpura,
-      gap: 4,
-      padding: 10,
-      alignSelf: "flex-start",
-      alignItems: "center"    
-    },
-  
-    textButton: {
-      color: colors.blanco,
-      fontWeight: "bold",
-      fontSize: 12
-    },
+const style = StyleSheet.create({
+  button: {
+    flexDirection: "row",
+    backgroundColor: colors.purpura,
+    gap: 4,
+    padding: 10,
+    alignSelf: "flex-start",
+    alignItems: "center"
+  },
 
- });
+  textButton: {
+    color: colors.blanco,
+    fontWeight: "bold",
+    fontSize: 12
+  },
+
+});

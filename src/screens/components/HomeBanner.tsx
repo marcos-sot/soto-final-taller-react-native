@@ -1,7 +1,7 @@
 import { View, Text,StyleSheet } from "react-native";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import { colors } from "@/src/constants/colors";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+
 
 
 export function HomeBanner() {
