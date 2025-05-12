@@ -1,9 +1,9 @@
 import { View, StyleSheet,FlatList } from "react-native";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import { ContenidoAudiovisual } from "@/src/data/contenidosAudiovisuales";
-import { generosContenidoAudiovisual } from "@/src/data/generosContenidoAudiovisual";
 import { MediaCard } from "./MediaCard";
 import { Link } from "expo-router";
+import { obtenerNombresDeGeneros } from "@/src/utils/utils";
 
 
 type TContentSectionProps = {
@@ -11,18 +11,6 @@ type TContentSectionProps = {
   data: ContenidoAudiovisual[];
 }
 
-
-export function obtenerNombresDeGeneros(listaGeneros: number[]): string[] {
-  return listaGeneros.map((id) => {
-    for (let i = 0; i < generosContenidoAudiovisual.length; i++) {
-      if (generosContenidoAudiovisual[i].id === id) {
-        const nombre = generosContenidoAudiovisual[i].nombre;
-        return nombre.charAt(0).toUpperCase() + nombre.slice(1);
-      }
-    }
-    return '';
-  });
-}
 
 
 export function ContentSection({ title, data }: TContentSectionProps) {
@@ -33,7 +21,6 @@ export function ContentSection({ title, data }: TContentSectionProps) {
           {title.toUpperCase()}
         </TextPressStart2P>
       </View>
-
       
         <FlatList 
           data={data}          

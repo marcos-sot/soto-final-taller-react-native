@@ -1,7 +1,8 @@
-import { View,StyleSheet,Text } from "react-native";
+import { View,StyleSheet} from "react-native";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import { colors } from "@/src/constants/colors";
 import { ImageBackground } from "expo-image";
+import { TagCard } from "./TagCard";
 
 
 type TMediaCardProp = {  
@@ -19,13 +20,7 @@ export function MediaCard({nombre,generos,imageUrl}:TMediaCardProp) {
       <ImageBackground style={style.ImageBackground} source={{uri:imageUrl}}></ImageBackground>
       <View style={style.containerInfo}>
         <TextPressStart2P style={style.titleText}>{nombre}</TextPressStart2P>
-        <View style={style.containerGeneros}>
-          {generos.map((nombre,index) => (
-            <View key={index} style={style.cardGenero}>              
-              <TextPressStart2P style={style.generoText}>{nombre}</TextPressStart2P>              
-            </View>
-            ))}          
-        </View>
+        <TagCard generos={generos} />
       </View>
     </View>
   );
@@ -58,28 +53,6 @@ titleText:{
   fontWeight: "bold",
   color: colors.blanco,  
 },
-
-containerGeneros:{
-  flexDirection: "row",
-  flexWrap: "wrap",   
-  gap: 4
-},
-
-cardGenero:{
-  backgroundColor: colors.grisOscuro,
-  padding: 5,
-  alignItems: "center"
-},
-
-generoText:{
-  fontSize: 9,
-  fontWeight: "bold",
-  color: colors.blanco
-},
-
-
-
-
 
 
 });

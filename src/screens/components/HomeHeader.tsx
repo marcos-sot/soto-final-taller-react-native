@@ -2,23 +2,28 @@ import { View, StyleSheet } from "react-native";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import { colors } from "@/src/constants/colors";
+import { Button } from "@/src/components/Button";
+import { useRouter } from "expo-router";
 
+const router = useRouter();
 
+function handleOnPressFilter(){
+  return router.push("/");
+}
 
 
 export function HomeHeader() {
   return (
     <View style={style.headerContainer}>
       <TextPressStart2P style={style.textTitle}>Pixdex</TextPressStart2P>
-      <View style={style.filterButton}>
-        <EvilIcons name="gear" size={24} color="white" />
-        <TextPressStart2P style={style.textButton}> FILTRAR</TextPressStart2P>
-      </View>
+      <Button
+        label="FILTER"
+        onPress={handleOnPressFilter}
+        icon={<EvilIcons name="gear" size={24} color="white" />}
+      />
     </View>
   );
 }
-
-
 
 
 
