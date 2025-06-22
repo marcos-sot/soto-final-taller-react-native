@@ -7,3 +7,6 @@ export const colors = {
     grisOscuro: "#403E43",
     blanco:"white",
   };
+
+
+  
