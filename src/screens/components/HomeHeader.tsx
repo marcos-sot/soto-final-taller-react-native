@@ -1,11 +1,13 @@
-import { View, StyleSheet,Modal,TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet,Modal,TouchableOpacity, Pressable } from "react-native";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import { colors } from "@/src/constants/colors";
 import { Button } from "@/src/components/Button";
 import { useRouter } from "expo-router";
 import { useState,ReactNode } from "react";
-
+import MyCheckbox from "@/src/components/MyCheckBox";
+import Entypo from '@expo/vector-icons/Entypo';
+import ModalReutilizable from "@/src/components/ModalReutilizable";
 const router = useRouter();
 
 
@@ -13,6 +15,7 @@ const router = useRouter();
 
 export function HomeHeader() {
   const [isModalVisible,setModalVisible] = useState <boolean> (false);
+  const [checked, setChecked] = useState(false);
 
   function mostrarModal(){
     setModalVisible(true);
@@ -33,33 +36,58 @@ export function HomeHeader() {
         icon={<EvilIcons name="gear" size={24} color="white" />}
       />
 
-      <Modal visible={isModalVisible} transparent animationType="fade">
-        <View style={{flex: 1,justifyContent: "center",alignItems: "center",backgroundColor: "rgba(0,0,0,0.7)"}}>
-          <View style={{padding:10,backgroundColor:colors.fondo,width: "80%",height: 500,}}>            
-            <View style={{justifyContent:"space-between",flex:1}}>
-              <View style={{gap:30}}>
-                <TextPressStart2P style={{color:colors.blanco, fontSize:18}}> Filter Content</TextPressStart2P>
-                <View>
-                  <TextPressStart2P style={{color:colors.verde,fontSize:16}}> Content Type</TextPressStart2P>
-                  <View>
-                    ITEMS DE CONTENIDO
-                  </View>
-                </View>
-                <View>
-                  <TextPressStart2P style={{color:colors.verde,fontSize:16}}> Generos</TextPressStart2P>
-                  <View>
-                    TODOS LOS GENEROS
-                  </View>
-                </View>
-              </View> 
-              <View style={{flexDirection:"row",gap:8}}>
-                <Button label="CANCEL" onPress={ocultarModal} icon={<EvilIcons name="gear" size={24} color="white" />}></Button>
-                <Button label="APPLY FILTERS" onPress={mostrarModal} icon={<EvilIcons name="gear" size={24} color="white" />}></Button>
-              </View>
-            </View> 
+      
+
+        <ModalReutilizable
+          visible={isModalVisible}
+          onModalClose={ocultarModal}
+          contentStyle={{ backgroundColor: colors.fondo }} // si querés mantener tu estilo
+        >
+          <View style={{ alignSelf: "flex-end" }}>
+            <Pressable onPress={ocultarModal}>
+              <Entypo name="cross" size={24} color="white" />
+            </Pressable>
           </View>
-        </View>
-      </Modal>
+
+          <View style={{ justifyContent: "space-between", flex: 1 }}>
+            <View style={{ gap: 30 }}>
+              <TextPressStart2P style={{ color: colors.blanco, fontSize: 18 }}>
+                Filter Content
+              </TextPressStart2P>
+
+              <View style={{ gap: 10 }}>
+                <TextPressStart2P style={{ color: colors.verde, fontSize: 16 }}>
+                  Content Type
+                </TextPressStart2P>
+                <MyCheckbox label="TV Shows" value={true} />
+              </View>
+
+              <View style={{ gap: 10 }}>
+                <TextPressStart2P style={{ color: colors.verde, fontSize: 16 }}>
+                  Géneros
+                </TextPressStart2P>
+                <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 16 }}>
+                  <MyCheckbox label="Drama" value={true} />
+                </View>
+              </View>
+            </View>
+
+            <View style={{ flexDirection: "row", gap: 8, alignSelf: "flex-end" }}>
+              <Button
+                label="CANCEL"
+                onPress={ocultarModal}
+                backgroundColor={colors.fondo}
+                borderColor={colors.grisOscuro}
+              />
+              <Button
+                label="APPLY FILTERS"
+                onPress={mostrarModal}
+                borderColor={colors.verde}
+              />
+            </View>
+          </View>
+        </ModalReutilizable>
+
 
 
     </View>

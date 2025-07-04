@@ -11,3 +11,8 @@ export function obtenerNombresDeGeneros(listaGeneros: number[]): string[] {
     return '';
   });
 }
+
+
+
+
+

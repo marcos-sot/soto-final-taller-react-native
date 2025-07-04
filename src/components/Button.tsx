@@ -5,13 +5,15 @@ import { colors } from "../constants/colors";
 type TButtonProp = {
   label: string;
   onPress: () => void;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
+  backgroundColor?: string;
+  borderColor?: string;
 }
 
 
-export function Button({ label, onPress, icon }: TButtonProp) {
+export function Button({ label, onPress, icon,backgroundColor = colors.purpura,borderColor }: TButtonProp) {
   return <Pressable onPress={onPress}>
-    <View style={style.button}>
+    <View style={[style.button, { backgroundColor,borderColor,borderWidth: borderColor ? 2 : 0}]}>
       {icon}
       <TextPressStart2P style={style.textButton}>{label}</TextPressStart2P>
     </View>
@@ -25,8 +27,7 @@ export function Button({ label, onPress, icon }: TButtonProp) {
 
 const style = StyleSheet.create({
   button: {
-    flexDirection: "row",
-    backgroundColor: colors.purpura,
+    flexDirection: "row",    
     gap: 4,
     padding: 10,
     alignSelf: "flex-start",
