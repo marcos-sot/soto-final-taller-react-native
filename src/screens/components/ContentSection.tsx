@@ -4,6 +4,8 @@ import { ContenidoAudiovisual } from "@/src/data/contenidosAudiovisuales";
 import { MediaCard } from "./MediaCard";
 import { Link } from "expo-router";
 import { obtenerNombresDeGeneros } from "@/src/utils/utils";
+import { AudiovisualesContext } from "@/src/context/audiovisual-context";
+import { use } from "react";
 
 
 type TContentSectionProps = {
@@ -14,6 +16,8 @@ type TContentSectionProps = {
 
 
 export function ContentSection({ title, data }: TContentSectionProps) {
+  const {generos} = use(AudiovisualesContext); 
+  
   return (
     <View style={style.container}>
       <View style={style.containerTitle}>
@@ -26,8 +30,7 @@ export function ContentSection({ title, data }: TContentSectionProps) {
           data={data}          
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => {
-            const listaNombres = obtenerNombresDeGeneros(item.generos);
-          
+            const listaNombres = obtenerNombresDeGeneros(item.generos,generos);            
             return (
               <Link 
               href={{

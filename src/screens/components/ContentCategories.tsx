@@ -25,9 +25,9 @@ export function ContentCategories() {
   useEffect(() => {
     // Solo asignar contenidosFiltrados si no hay filtros aplicados y los contenidos ya han sido cargados
     if (contenidosFiltrados.length === 0 && contenidos.length > 0) {
-      setContenidosFiltrados(contenidos); // Establecemos los contenidos iniciales sin filtro
+      setContenidosFiltrados(contenidos); 
     }
-  }, []);
+  }, [contenidos]);
 
 
 

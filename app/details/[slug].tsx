@@ -4,36 +4,36 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { colors } from "@/src/constants/colors";
 import { ImageBackground } from "expo-image";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import { contenidosAudiovisuales } from "@/src/data/contenidosAudiovisuales";
-import { tiposContenidoAudiovisual } from "@/src/data/tiposContenidoAudiovisual";
 import { obtenerNombresDeGeneros } from "@/src/utils/utils";
 import { TagCard } from "@/src/screens/components/TagCard";
 import { Button } from "@/src/components/Button"; 
+import { AudiovisualesContext } from "@/src/context/audiovisual-context";
+import { use } from "react";
 
 
-
-
-
-function extraerDatos(id: string) {
-  const posicionMedia = parseInt(id, 10);  
-  return contenidosAudiovisuales[posicionMedia - 1];
-}
-
-function extraerTipo(id: number) {
-  const nombreTipo = tiposContenidoAudiovisual[id - 1].singular;
-  return nombreTipo.charAt(0).toUpperCase() + nombreTipo.slice(1);;
-}
 
 
 
 
 export default function MediaSlugDetail() {
+  const {contenidos,generos,tipos} = use(AudiovisualesContext);
   const { slug } = useLocalSearchParams();
   const media = extraerDatos(slug as string);//obtengo los datos de la serie/pelicula/anime
   const tipoId = media.tipoId //guardo el numero de tipo
   const tipo = extraerTipo(tipoId);//obtengo el nombre del tipo
-  const nombreGenero = obtenerNombresDeGeneros(media.generos);//llamo a la funcion que importo para que me devuelva el array con los nombres
+  const nombreGenero = obtenerNombresDeGeneros(media.generos,generos);//llamo a la funcion que importo para que me devuelva el array con los nombres
   const router = useRouter();
+
+
+  function extraerTipo(id: number) {
+  const nombreTipo = tipos[id - 1].singular;
+  return nombreTipo.charAt(0).toUpperCase() + nombreTipo.slice(1);;
+}
+
+  function extraerDatos(id: string) {
+  const posicionMedia = parseInt(id, 10);  
+  return contenidos[posicionMedia - 1];
+}
 
 
  function handleOnPressButton() {
