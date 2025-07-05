@@ -1,4 +1,4 @@
-import { useState, use } from "react";
+import { useState, useContext,use } from "react";
 import { View, Pressable,ScrollView } from "react-native";
 import { Button } from "@/src/components/Button";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";

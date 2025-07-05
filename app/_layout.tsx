@@ -6,6 +6,7 @@ export default function RootLayout() {
     <AudiovisualesContextProvider>
       <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="/details" options={{ headerShown: false }} />
+          <Stack.Screen name="ahorcado" options={{ headerShown: false }} />
       </Stack>
     </AudiovisualesContextProvider>
 )};

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ViewStyle,
 } from "react-native";
+import { colors } from "../constants/colors";
 
 interface ModalReutilizableProps {
   visible: boolean;
@@ -48,7 +49,9 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 500,
     padding: 10,
-    backgroundColor: "white", 
-    borderRadius: 8,
+    backgroundColor: colors.blanco,
+    borderColor:colors.grisOscuro,
+    borderWidth:2, 
+    borderRadius: 2,
   },
 });
