@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 500,
     padding: 10,
-    backgroundColor: "white", // podés sobreescribir esto desde afuera
+    backgroundColor: "white", 
     borderRadius: 8,
   },
 });
