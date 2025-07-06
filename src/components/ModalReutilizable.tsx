@@ -5,6 +5,8 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   ViewStyle,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { colors } from "../constants/colors";
 
@@ -12,8 +14,8 @@ interface ModalReutilizableProps {
   visible: boolean;
   onModalClose: () => void;
   children: ReactNode;
-  contentStyle?: ViewStyle; 
-  overlayStyle?: ViewStyle; 
+  contentStyle?: ViewStyle;
+  overlayStyle?: ViewStyle;
 }
 
 export default function ModalReutilizable({
@@ -28,9 +30,14 @@ export default function ModalReutilizable({
       <TouchableWithoutFeedback onPress={onModalClose}>
         <View style={[styles.overlay, overlayStyle]}>
           <TouchableWithoutFeedback>
-            <View style={[styles.content, contentStyle]}>
-              {children}
-            </View>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              style={{ width: "100%", alignItems: "center" }}
+            >
+              <View style={[styles.content, contentStyle]}>
+                {children}
+              </View>
+            </KeyboardAvoidingView>
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
@@ -50,8 +57,8 @@ const styles = StyleSheet.create({
     height: 500,
     padding: 10,
     backgroundColor: colors.fondo,
-    borderColor:colors.grisOscuro,
-    borderWidth:2, 
+    borderColor: colors.grisOscuro,
+    borderWidth: 2,
     borderRadius: 2,
   },
 });

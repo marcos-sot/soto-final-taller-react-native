@@ -19,7 +19,7 @@ export function GameStatusModal({
   buttonLabel,
 }: Props) {
   return (
-    <ModalReutilizable visible={visible} onModalClose={onClose} contentStyle={{ height: 200 }}>
+    <ModalReutilizable visible={visible} onModalClose={onClose} contentStyle={{ height: 200,borderColor:colors.purpuraClaro }}>
       <View style={style.container}>
         <TextPressStart2P style={style.textMensage}>
           {message}
@@ -28,6 +28,7 @@ export function GameStatusModal({
           <Button label={buttonLabel} onPress={onClose} borderColor={colors.verde} />
         </Pressable>
       </View>
+      
     </ModalReutilizable>
   );
 }
@@ -35,9 +36,10 @@ export function GameStatusModal({
 
 const style = StyleSheet.create ({
   container:{
-    gap: 40, 
-    alignItems: "center",
-    padding:10
+    gap: 40,     
+    padding:10,
+    alignItems:"center"  
+    
   },
 
   textMensage:{
@@ -45,6 +47,7 @@ const style = StyleSheet.create ({
     color: colors.blanco, 
     textAlign: "center"
   },
+  
 });
 
 

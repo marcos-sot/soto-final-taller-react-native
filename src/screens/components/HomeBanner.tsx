@@ -1,22 +1,21 @@
-import { View, Text,StyleSheet } from "react-native";
+import { View, Text,StyleSheet,Pressable } from "react-native";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import { colors } from "@/src/constants/colors";
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 
 
 
 export function HomeBanner() {
+  const router = useRouter();
   return (
     <View style={style.bannerContainer}>
-      <Link href="/ahorcado" asChild>  
-        <View style={style.card}>        
-          <View style={style.textContainer}>
-            <TextPressStart2P style={style.textTitle}>Desafío del Ahorcado</TextPressStart2P>
-            <Text style={style.textDescription}>Adivina los títulos letra por letra. ¿Cuántos puedes identificar?</Text>
-          </View>
-          <TextPressStart2P style={style.textPlay}>Jugar</TextPressStart2P>     
+      <Pressable onPress={() => router.push("/ahorcado")} style={style.card}>
+        <View style={style.textContainer}>
+          <TextPressStart2P style={style.textTitle}>Desafío del Ahorcado</TextPressStart2P>
+          <Text style={style.textDescription}>Adivina los títulos letra por letra. ¿Cuántos puedes identificar?</Text>
         </View>
-      </Link>   
+        <TextPressStart2P style={style.textPlay}>Jugar</TextPressStart2P>
+      </Pressable>   
     
 
 

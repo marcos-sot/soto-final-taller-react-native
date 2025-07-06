@@ -49,7 +49,7 @@ export function HeaderJuego({ vidas, puntaje, nombreJugador }: Props) {
 const style = StyleSheet.create({
  fontStyle:{
         color:colors.blanco,
-        fontSize:8,
+        fontSize:10,
     },
 
     bannerContainer:{

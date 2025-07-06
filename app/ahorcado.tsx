@@ -1,8 +1,9 @@
 import { View, StyleSheet, ImageBackground } from "react-native";
-import { useState, use, useEffect } from "react";
+import { useState, use, useCallback } from "react";
 import { colors } from "@/src/constants/colors";
 import { Button } from "@/src/components/Button";
 import { useRouter } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
 import GuessTitleModal from "@/src/screens/components/juego/GuessTitleModal";
 import { HeaderJuego } from "@/src/screens/components/juego/HeaderJuego";
 import { AudiovisualesContext } from "@/src/context/audiovisual-context";
@@ -28,6 +29,8 @@ export default function Ahorcado() {
   function openModal() {
     setModalVisible(true);
   }
+
+  
 
 
   
@@ -61,7 +64,7 @@ export default function Ahorcado() {
 
 
 
-  function handleOnPressButton() {
+  function handleOnPressButton() {    
     return router.push("/");
   }
 
@@ -78,25 +81,30 @@ export default function Ahorcado() {
 
   function closeModal() {
     setStatusModalVisible(false);
-    if (vidas <= 0) {
+    if (vidas <= 0) {     
       router.push("/");
     } else {
       avanzarContenido(); 
     }
   }
 
+  useFocusEffect(
+    useCallback(() => {
+      iniciarJuego();
+    }, [])
+);
+ 
 
 
+function iniciarJuego() {
+  const mezclados = [...contenidos].sort(() => Math.random() - 0.5);
+  setContenidosParaJugar(mezclados);
+  setContenidoActual(mezclados[0]);
+  setVidas(5);
+  setPuntaje(0);
+  
+}
 
-  useEffect(() => {
-    if (contenidos.length > 0) {
-      const mezclados = [...contenidos].sort(() => Math.random() - 0.5);
-      setContenidosParaJugar(mezclados);
-      setContenidoActual(mezclados[0]);
-      setVidas(5);
-      setPuntaje(0);
-    }
-  }, [contenidos]);
 
 
   return (
@@ -156,6 +164,7 @@ const style = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.fondo,
     gap: 10,
+    padding:10
 
   },
 

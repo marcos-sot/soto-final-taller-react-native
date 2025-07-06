@@ -22,7 +22,7 @@ export default function GuessTitleModal({ visible, onClose, onSubmitGuess }: Pro
   }
 
   return (
-    <ModalReutilizable visible={visible} onModalClose={onClose} contentStyle={{ height:220 }}>
+    <ModalReutilizable visible={visible} onModalClose={onClose} contentStyle={{ height:200 }}>
       <View style={styles.separatorContent}>
         <View style={styles.closeStyle}>
             <Pressable onPress={onClose}>
@@ -48,6 +48,7 @@ export default function GuessTitleModal({ visible, onClose, onSubmitGuess }: Pro
         </View>
        </View>
       </View>
+      
     </ModalReutilizable>
   );
 }
@@ -84,5 +85,6 @@ const styles = StyleSheet.create({
 
   buttonContainer:{
     alignSelf:"flex-end"
-  }
+  },
+
 });
