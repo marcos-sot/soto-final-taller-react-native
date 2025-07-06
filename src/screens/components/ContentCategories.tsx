@@ -11,67 +11,48 @@ import { AudiovisualesContext } from "@/src/context/audiovisual-context";
 
 
 export function ContentCategories() {
-  const { tipos, setTipos, generos,setGeneros,contenidos,setContenidos,isLoaded, setIsLoaded,contenidosFiltrados,setContenidosFiltrados } = use(AudiovisualesContext);
+  const { tipos, setTipos,setGeneros,contenidos,setContenidos,isLoaded, setIsLoaded,contenidosFiltrados,setContenidosFiltrados } = use(AudiovisualesContext);
 
   useEffect(() => {
-    if (!isLoaded){
-      obtenerContenidos();
-      obtenerTipos();
-      obtenerGeneros();
-    }
-  }, []);
+  if (!isLoaded) {
+    cargarDatos();
+  }
+}, []);
+
+async function cargarDatos() {
+  try {
+    const [contenidosRes, tiposRes, generosRes] = await Promise.all([
+      getContenidos(),
+      getTipos(),
+      getGeneros(),
+    ]);
+    setContenidos(contenidosRes);
+    setTipos(tiposRes);
+    setGeneros(generosRes);
+    setIsLoaded(true);
+  } catch (error) {
+    console.log("Error al cargar datos", error);
+    alert("Fallo la carga de datos");
+  }
+}
 
 
-  useEffect(() => {
-    // Solo asignar contenidosFiltrados si no hay filtros aplicados y los contenidos ya han sido cargados
+
+  useEffect(() => {    
     if (contenidosFiltrados.length === 0 && contenidos.length > 0) {
-      setContenidosFiltrados(contenidos); 
+      setContenidosFiltrados(contenidos); // se setean los contenidos a lo contenidos filtrados la prmera vez
     }
   }, [contenidos]);
+  
 
 
-
-
-  async function obtenerTipos() {   
-    try {
-      const data = await getTipos();
-      setTipos(data);
-    } catch (error) {
-      alert(`FALLO ${error}`);
-      console.log("ERROR", error);
-    } 
-  }
-
-  async function obtenerContenidos() {   
-    try {
-      const data = await getContenidos();
-      setContenidos(data);
-    } catch (error) {
-      alert(`FALLO ${error}`);
-      console.log("ERROR", error);
-    } 
-  }
-
-    async function obtenerGeneros() {   
-    try {
-      const data = await getGeneros();
-      setGeneros(data);
-    } catch (error) {
-      alert(`FALLO ${error}`);
-      console.log("ERROR", error);
-    } 
-  }
-
-
-  const info = (tipos ?? []).map((tipo) => {
+ const info = tipos.flatMap(tipo => {
   const contenidosDelTipo = contenidosFiltrados.filter(
     (contenido) => contenido.tipoId === tipo.id
   );
-
-  return {
-    nombre: tipo.singular,
-    contenidos: contenidosDelTipo,
-  };
+  return contenidosDelTipo.length > 0
+    ? [{ nombre: tipo.singular, contenidos: contenidosDelTipo }]
+    : [];
 });
 
 
