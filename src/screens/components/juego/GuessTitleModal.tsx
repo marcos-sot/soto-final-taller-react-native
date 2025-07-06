@@ -22,31 +22,31 @@ export default function GuessTitleModal({ visible, onClose, onSubmitGuess }: Pro
   }
 
   return (
-    <ModalReutilizable visible={visible} onModalClose={onClose} contentStyle={{ backgroundColor: colors.fondo,height:220 }}>
-      <View style={{ gap: 10 }}>
-        <View style={{ alignSelf: "flex-end" }}>
+    <ModalReutilizable visible={visible} onModalClose={onClose} contentStyle={{ height:220 }}>
+      <View style={styles.separatorContent}>
+        <View style={styles.closeStyle}>
             <Pressable onPress={onClose}>
             <Entypo name="cross" size={18} color="white" />
             </Pressable>
         </View>
-        <View style={{ gap: 20 }}>
-          <TextPressStart2P style={{ fontSize: 16,color:colors.blanco }}>Guess the Title</TextPressStart2P>
-          
+        <View style={styles.inputStyle}>
+          <TextPressStart2P style={styles.textTitle}>Guess the Title</TextPressStart2P>         
        
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Enter complete title"
-            placeholderTextColor="#888"
-            value={title}
-            onChangeText={setTitle}
-            style={styles.input}
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Enter complete title"
+              placeholderTextColor="#888"
+              value={title}
+              onChangeText={setTitle}
+              style={styles.input}
+            />
         </View>
-        <View style={{alignSelf:"flex-end"}}>
+
+        <View style={styles.buttonContainer}>
             <Button label="SUBMIT GUESS" onPress={handleSubmit} borderColor={colors.verde}/>
         </View>
-        </View>
+       </View>
       </View>
     </ModalReutilizable>
   );
@@ -64,4 +64,25 @@ const styles = StyleSheet.create({
     fontFamily: "PressStart2P-Regular",
     color: colors.blanco,
   },
+
+  separatorContent:{
+    gap: 10
+  },
+
+  closeStyle:{
+    alignSelf: "flex-end"
+  },
+
+  inputStyle:{
+    gap: 20
+  },
+
+  textTitle:{
+    fontSize: 16,
+    color:colors.blanco
+  },
+
+  buttonContainer:{
+    alignSelf:"flex-end"
+  }
 });

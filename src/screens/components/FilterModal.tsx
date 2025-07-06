@@ -1,5 +1,5 @@
-import { useState, useContext,use } from "react";
-import { View, Pressable,ScrollView } from "react-native";
+import { useState,use } from "react";
+import { View, Pressable,ScrollView,StyleSheet } from "react-native";
 import { Button } from "@/src/components/Button";
 import { TextPressStart2P } from "@/src/components/TextPressStart2P";
 import ModalReutilizable from "@/src/components/ModalReutilizable";
@@ -34,29 +34,29 @@ export function FilterModal({ visible, onClose }: FilterModalProps) {
       (c) => generosSeleccionados.length === 0 || c.generos.some((g) => generosSeleccionados.includes(g))
     );
     setContenidosFiltrados(filtrados);
-    onClose(); // cerrar modal
+    onClose();
   }
 
 
 
 
   return (
-    <ModalReutilizable visible={visible} onModalClose={onClose} contentStyle={{ backgroundColor: colors.fondo }}>
+    <ModalReutilizable visible={visible} onModalClose={onClose}>
       <ScrollView>
-          <View style={{ alignSelf: "flex-end" }}>
+          <View style={style.closeStyle}>
             <Pressable onPress={onClose}>
               <Entypo name="cross" size={18} color="white" />
             </Pressable>
           </View>
 
-          <View style={{ justifyContent: "space-between", flex: 1,padding:8 }}>
-            <View style={{ gap: 30 }}>
-              <TextPressStart2P style={{ color: colors.blanco, fontSize: 18 }}>
+          <View style={style.container}>
+            <View style={style.separatorContent}>
+              <TextPressStart2P style={style.textTitle}>
                 Filter Content
               </TextPressStart2P>
 
-              <View style={{ gap: 10 }}>
-                <TextPressStart2P style={{ color: colors.verde, fontSize: 16 }}>
+              <View style={style.sectionSeparator}>
+                <TextPressStart2P style={style.textSection}>
                   Content Types
                 </TextPressStart2P>
                 {(tipos ?? []).map((tipo) => (
@@ -75,13 +75,13 @@ export function FilterModal({ visible, onClose }: FilterModalProps) {
                 ))}
               </View>
 
-              <View style={{ gap: 10 }}>
-                <TextPressStart2P style={{ color: colors.verde, fontSize: 16 }}>
+              <View style={style.sectionSeparator}>
+                <TextPressStart2P style={style.textSection}>
                   Géneros
                 </TextPressStart2P>
-                <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 10 }}>
+                <View style={style.generosSection}>
                   {(generos ?? []).map((genero) => (
-                    <View key={genero.id} style={{ width: '48%' }}>
+                    <View key={genero.id} style={style.containerCheckbox}>
                       <MyCheckbox
                         label={mayuscula(genero.nombre)}
                         value={generosSeleccionados.includes(genero.id)}
@@ -98,8 +98,8 @@ export function FilterModal({ visible, onClose }: FilterModalProps) {
                 </View>
               </View>
             </View>
-            <View style={{height:30}}></View>      
-            <View style={{ flexDirection: "row", gap: 8, alignSelf: "flex-end" }}>
+            <View style={style.separador}></View>      
+            <View style={style.buttonContainer}>
               <Button
                 label="CANCEL"
                 onPress={onClose}
@@ -117,3 +117,58 @@ export function FilterModal({ visible, onClose }: FilterModalProps) {
     </ModalReutilizable>
   );
 }
+
+
+
+const style = StyleSheet.create ({
+  closeStyle:{
+    alignSelf: "flex-end"
+  },
+  
+  container:{
+    justifyContent: "space-between",
+    flex: 1,
+    padding:8,
+  },
+
+  separatorContent:{
+    gap: 30 
+  },
+
+  textTitle:{
+    color: colors.blanco, 
+    fontSize: 18
+  },
+
+  sectionSeparator:{
+    gap:10
+  },
+
+  textSection:{
+    color: colors.verde, 
+    fontSize: 16
+  },
+
+  generosSection:{
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    gap: 10
+  },
+
+  separador:{
+    height:30
+  },
+
+  buttonContainer:{
+    flexDirection: "row", 
+    gap: 8, 
+    alignSelf: "flex-end"
+  },
+
+  containerCheckbox:{
+    width: "48%"
+  }
+
+
+
+});

@@ -81,7 +81,7 @@ export default function Ahorcado() {
     if (vidas <= 0) {
       router.push("/");
     } else {
-      avanzarContenido(); // o lo que quieras hacer al cerrar
+      avanzarContenido(); 
     }
   }
 

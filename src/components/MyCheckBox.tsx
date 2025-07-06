@@ -1,5 +1,4 @@
-import { Checkbox } from 'expo-checkbox';
-import { View, Text,Pressable } from 'react-native';
+import { View, Text,Pressable,StyleSheet } from 'react-native';
 import { colors } from '../constants/colors';
 import { Entypo } from '@expo/vector-icons';
 
@@ -14,19 +13,9 @@ export default function MyCheckbox({ label, value, onChange }: TMyCheckBoxProps)
   return (
     <Pressable
       onPress={() => onChange(!value)}
-      style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}
+      style={style.presableStyle}
     >
-      <View
-        style={{
-          width: 20,
-          height: 20,
-          backgroundColor: value ? colors.purpuraClaro : colors.fondo,
-          borderColor: colors.purpuraClaro,
-          borderWidth: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <View style={[ style.checkBoxStyle, { backgroundColor: value ? colors.purpuraClaro : colors.fondo }]}>
         {value && (
           <Entypo name="check" size={14} color="white" />
         )}
@@ -35,3 +24,20 @@ export default function MyCheckbox({ label, value, onChange }: TMyCheckBoxProps)
     </Pressable>
   );
 }
+
+const style = StyleSheet.create ({
+  checkBoxStyle:{
+    width: 16,
+    height: 16,    
+    borderColor: colors.purpuraClaro,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  presableStyle:{
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginVertical: 4
+  }
+});

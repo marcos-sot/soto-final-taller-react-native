@@ -8,7 +8,7 @@ type TTagCardProp={
 
 
 export function TagCard({generos}:TTagCardProp) {
-  console.log("TAG CARG",generos)
+  
   return (
     <View style={style.containerGeneros}>
     {generos.map((nombre, index) => (
